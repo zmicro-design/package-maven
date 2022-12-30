@@ -51,8 +51,8 @@ install() {
 
   # bin
   log::info "[$(timestamp)][package][$name] bin mvn/maven ..."
-  sudo ln -s $usr_lib_dir/bin/mvn $usr_bin_dir/mvn
-  sudo ln -s $usr_lib_dir/bin/mvn $usr_bin_dir/maven
+  sudo ln -sf $usr_lib_dir/bin/mvn $usr_bin_dir/mvn
+  sudo ln -sf $usr_lib_dir/bin/mvn $usr_bin_dir/maven
 
   # clean
   log::info "[$(timestamp)][package][$name] cleaning ..."
