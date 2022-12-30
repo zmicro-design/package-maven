@@ -24,6 +24,10 @@ install() {
 
   # reference: https://maven.apache.org/download.cgi
   # example:
+  #   https://dlcdn.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+  #   https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+  # 
+  # or: https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu
   #   https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
   # generate url
   local url="${PACKAGE_CORE_RELEASE_DOWNLOAD}/maven-3/${PACKAGE_CORE_VERSION#v}/binaries/apache-${name}-${PACKAGE_CORE_VERSION#v}-bin.tar.gz"

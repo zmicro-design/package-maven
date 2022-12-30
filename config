@@ -2,4 +2,4 @@
 
 export PACKAGE_CORE_NAME="maven"
 export PACKAGE_CORE_VERSION=v3.8.6
-export PACKAGE_CORE_RELEASE_DOWNLOAD="https://mirrors.estointernet.in/apache/maven"
+export PACKAGE_CORE_RELEASE_DOWNLOAD="https://dlcdn.apache.org/maven"
