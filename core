@@ -12,11 +12,12 @@ install() {
   local platform="$PACKAGE_OS_PLATFORM"
   # usr_bin_dir
   local usr_bin_dir="$PACKAGE_USER_BIN_DIR"
+  local usr_lib_dir="$PACKAGE_USER_LIB_DIR"
   local tmp_dir="$PACKAGE_TMP_DIR"
 
   # files
   local tmp_file="$name.tar.gz"
-  local usr_lib_dir="/usr/local/lib/maven"
+  local lib_dir="./apache-${name}-${PACKAGE_CORE_VERSION#v}"
   local bin_file="./apache-${name}-${PACKAGE_CORE_VERSION#v}/bin/mvn"
 
   # prepare context
@@ -27,7 +28,7 @@ install() {
   #   https://dlcdn.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
   #   https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz (@#TODO removed)
   #   https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
-  # 
+  #
   # or: https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu
   #   https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
   # generate url
@@ -48,12 +49,25 @@ install() {
 
   # install
   log::info "[$(timestamp)][package][$name] installing ..."
-  sudo mv ./apache-${name}-${PACKAGE_CORE_VERSION#v} $usr_lib_dir
+  if [ -d "$usr_lib_dir/${name}" ]; then
+    log::info "[$(timestamp)][package][$name] removing old lib ..."
+    sudo rm -rf $usr_lib_dir/${name}
+  fi
+  sudo mv $lib_dir $usr_lib_dir/${name}
 
   # bin
   log::info "[$(timestamp)][package][$name] bin mvn/maven ..."
-  sudo ln -sf $usr_lib_dir/bin/mvn $usr_bin_dir/mvn
-  sudo ln -sf $usr_lib_dir/bin/mvn $usr_bin_dir/maven
+  sudo ln -sf $usr_lib_dir/${name}/bin/mvn $usr_bin_dir/${PACKAGE_CORE_BIN_NAME}
+  sudo ln -sf $usr_lib_dir/${name}/bin/mvn $usr_bin_dir/${name}
+
+  # profile
+  log::success "[$(timestamp)][package][$name] config MAVEN_HOME=$usr_lib_dir/$name to global env file ..."
+  local envs=$(
+    cat <<-END
+export MAVEN_HOME=$usr_lib_dir/$name
+END
+  )
+  config::profile "# ZMICRO PACKAGE MAVEN #" "$envs"
 
   # clean
   log::info "[$(timestamp)][package][$name] cleaning ..."

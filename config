@@ -1,5 +1,6 @@
 #!/bin/bash
 
 export PACKAGE_CORE_NAME="maven"
+export PACKAGE_CORE_BIN_NAME="mvn"
 export PACKAGE_CORE_VERSION=v3.6.3
 export PACKAGE_CORE_RELEASE_DOWNLOAD="https://dlcdn.apache.org/maven"
