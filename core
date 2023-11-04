@@ -31,6 +31,10 @@ install() {
   #
   # or: https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu
   #   https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+  # 
+  # or: https://mirrors.aliyun.com/apache/maven/maven-3
+  #   https://mirrors.aliyun.com/apache/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+  #   https://mirrors.aliyun.com/apache/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.tar.gz
   # generate url
   local url="${PACKAGE_CORE_RELEASE_DOWNLOAD}/maven-3/${PACKAGE_CORE_VERSION#v}/binaries/apache-${name}-${PACKAGE_CORE_VERSION#v}-bin.tar.gz"
   log::debug "[$(timestamp)][package][$name][$kernel][$arch] url: $url, file: ${tmp_file}, tmp_dir: $tmp_dir"
